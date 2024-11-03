@@ -1,23 +1,21 @@
-from pygame import *
+from pygame import * 
 
-class GameSprite(sprite.Sprite):
+class GameSparite(sprite.Sprite):
     def __init__(self, picture, x, y, width, height):
-        super().__init__()
-
         self.image = transform.scale(image.load(picture), (width, height))
 
-        self.rect = self.image.get_rect()
+        self.rect = self.image .get_rect()
 
         self.rect.x = x
         self.rect.y = y
 
-    def reset(self, window):
-        window.blit(self.image, (self.rect.x, self.rect.y))
+    def reset(self, window_):
+        window_.blit(self.image, (self.rect.x, self.rect.y))
 
 
-class Player(GameSprite):
+class Player(GameSparite):
     def __init__(self, picture, x, y, width, height, x_speed, y_speed):
-        GameSprite.__init__(self, picture, x, y, width, height)
+        GameSparite.__init__(self, picture, x, y, width, height)
 
         self.x_speed = x_speed
         self.y_speed = y_speed
@@ -25,3 +23,5 @@ class Player(GameSprite):
     def update(self):
         self.rect.x += self.x_speed
         self.rect.y += self.y_speed
+
+
