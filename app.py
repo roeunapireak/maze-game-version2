@@ -19,16 +19,21 @@ WALL2 = GameSprite('images/platform2_h.png', win_width/2-win_width/3, win_height
 final_sprite = GameSprite('images/pac-1.png', win_width - 85, win_height - 100, 80, 80)
 monster = GameSprite('images/cyborg.png', win_width - 80, 180, 80, 80)
 
+wall_group = sprite.Group()
+wall_group.add(WALL1)
+wall_group.add(WALL2)
+
 running = True
 finish = True
 ''' game loop '''
 while running: 
     if finish:
         window.fill(backgroud)
-        WALL1.reset(window)
-        WALL2.reset(window)
+        # WALL1.reset(window)
+        # WALL2.reset(window)
+        wall_group.draw(window)
         HERO.reset(window)
-        HERO.update(HERO, win_width, win_height)
+        HERO.update(HERO, win_width, win_height, wall_group)
         final_sprite.reset(window)
         monster.reset(window)
         if sprite.collide_rect(HERO, monster):
