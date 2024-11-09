@@ -28,7 +28,7 @@ while running:
         WALL1.reset(window)
         WALL2.reset(window)
         HERO.reset(window)
-        HERO.update()
+        HERO.update(HERO, win_width, win_height)
         final_sprite.reset(window)
         monster.reset(window)
         if sprite.collide_rect(HERO, monster):

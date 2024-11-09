@@ -20,6 +20,8 @@ class Player(GameSprite):
         self.x_speed = x_speed
         self.y_speed = y_speed
 
-    def update(self):
-        self.rect.x += self.x_speed
-        self.rect.y += self.y_speed
+    def update(self, hero, window_width, window_height):
+        if hero.rect.x <= window_width-80 and hero.x_speed > 0 or hero.rect.x >= 0 and hero.x_speed < 0:
+            self.rect.x += self.x_speed
+        if hero.rect.y <= window_height-80 and hero.y_speed > 0 or hero.rect.y >= 0 and hero.y_speed < 0:
+            self.rect.y += self.y_speed
