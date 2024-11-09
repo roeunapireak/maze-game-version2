@@ -1,6 +1,6 @@
 from pygame import * 
 
-class GameSparite(sprite.Sprite):
+class GameSprite(sprite.Sprite):
     def __init__(self, picture, x, y, width, height):
         self.image = transform.scale(image.load(picture), (width, height))
 
@@ -13,9 +13,9 @@ class GameSparite(sprite.Sprite):
         window_.blit(self.image, (self.rect.x, self.rect.y))
 
 
-class Player(GameSparite):
+class Player(GameSprite):
     def __init__(self, picture, x, y, width, height, x_speed, y_speed):
-        GameSparite.__init__(self, picture, x, y, width, height)
+        GameSprite.__init__(self, picture, x, y, width, height)
 
         self.x_speed = x_speed
         self.y_speed = y_speed
