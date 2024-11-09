@@ -14,7 +14,7 @@ window.fill(backgroud)
 
 ''' objects '''
 HERO = Player('images/hero.png', 5, win_height-80, 80, 80, 0,0) 
-WALL1 = GameSparite('image/platform2_v.png', 370, 100, 50, 400)
+WALL1 = GameSparite('images/platform2_v.png', 370, 100, 50, 400)
 WALL2 = GameSparite('images/platform2_h.png', win_width/2-win_width/3, win_height/2, 300, 50)
 
 
