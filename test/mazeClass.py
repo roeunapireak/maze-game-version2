@@ -25,12 +25,18 @@ class Player(GameSprite):
         if hero.rect.x <= window_width-80 and hero.x_speed > 0 or hero.rect.x >= 0 and hero.x_speed < 0:
             self.rect.x += self.x_speed
             platforms_touched = sprite.spritecollide(self, object_group, False)
+            print(platforms_touched)
             if self.x_speed > 0:
                 for p in platforms_touched:
                     self.rect.right = min(self.rect.right, p.rect.left)
+                    print(self.x_speed)
+                    print(p)
+                    print(self.rect.right)
+                    print(p.rect.left)
             elif self.x_speed < 0:
                 for p in platforms_touched:
                     self.rect.left = max(self.rect.left, p.rect.right)
+                    print(self.x_speed)
 
         if hero.rect.y <= window_height-80 and hero.y_speed > 0 or hero.rect.y >= 0 and hero.y_speed < 0:
             self.rect.y += self.y_speed
