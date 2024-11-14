@@ -18,16 +18,21 @@ WALL1 = GameSprite('../images/platform2_v.png', 370, 100, 50, 400)
 WALL2 = GameSprite('../images/platform2_h.png', win_width/2-win_width/3, win_height/2, 300, 50)
 final_sprite = GameSprite('../images/pac-1.png', win_width - 85, win_height - 100, 80, 80)
 # monster = GameSprite('../images/cyborg.png', win_width - 80, 180, 80, 80)
-monster1 = Enemy('../images/cyborg.png', win_width - 80, 180, 80, 80, 1)
 
-bullet_group = sprite.Group()
+monster_group = sprite.Group()
+monster = Enemy('../images/cyborg.png', win_width - 80, 180, 80, 80, 1)
+monster_group.add(monster)
+
 def fire():
-    bullet = Bullet('../images/bullet.png',  HERO.rect.right, HERO.rect.centery, 15, 20, 5)
+    bullet = Bullet('../images/bullet.png', HERO.rect.right, HERO.rect.centery, 15, 20, 5)
     bullet_group.add(bullet)
 
 wall_group = sprite.Group()
 wall_group.add(WALL1)
 wall_group.add(WALL2)
+
+bullet_group = sprite.Group()
+
 
 
 running = True
@@ -43,15 +48,17 @@ while running:
         HERO.reset(window)
         HERO.update(HERO, win_width, win_height, wall_group)
         final_sprite.reset(window)
-        monster1.reset(window)
-        monster1.update(win_width)
+        # monster.reset(window)
+        # monster.update(win_width)
 
-        # bullet.reset(window)
-        # bullet.update(win_width)
-        bullet_group.update(win_height)
+        monster_group.update(win_width)
+        monster_group.draw(window)
+        bullet_group.update(win_width)
         bullet_group.draw(window)
 
-        if sprite.collide_rect(HERO, monster1):
+        sprite.groupcollide(bullet_group, monster_group, True, False)
+
+        if sprite.collide_rect(HERO, monster):
             finish = False
             game_over = image.load('../images/game-over_1.png')
             back_gr = game_over.get_width() // game_over.get_height()
@@ -78,7 +85,7 @@ while running:
                 HERO.y_speed = -2
             elif e.key == K_DOWN:
                 HERO.y_speed = 2
-
+            
             elif e.key == K_SPACE:
                 fire()
 
@@ -91,8 +98,6 @@ while running:
                 HERO.y_speed = 0
             elif e.key == K_DOWN:
                 HERO.y_speed = 0
-
-
 
     display.update()
 

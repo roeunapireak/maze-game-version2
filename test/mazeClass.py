@@ -60,11 +60,6 @@ class Enemy(GameSprite):
         else:
             self.rect.x += self.speed
 
-    # def fire(self):
-    #     generate_buller = True
-    #     bullet = Bullet('images/bullet.png', self.rect.right, self.rect.center, 15, 20, 5)
-
-
 class Bullet(GameSprite):
     def __init__(self, picture, x,y, width,height, speed):
         GameSprite.__init__(self, picture, x,y, width,height)
@@ -72,5 +67,5 @@ class Bullet(GameSprite):
 
     def update(self, window_width):
         self.rect.x += self.speed
-        if self.rect.x > window_width + 10:
+        if self.rect.x > window_width + 250:
             self.kill()
