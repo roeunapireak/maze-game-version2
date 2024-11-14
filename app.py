@@ -20,10 +20,16 @@ final_sprite = GameSprite('images/pac-1.png', win_width - 85, win_height - 100, 
 # monster = GameSprite('images/cyborg.png', win_width - 80, 180, 80, 80)
 monster1 = Enemy('images/cyborg.png', win_width - 80, 180, 80, 80, 1)
 
+def fire():
+    bullet = Bullet('images/bullet.png', HERO.rect.right, HERO.rect.centery, 15, 20, 5)
+    bullet_group.add(bullet)
 
 wall_group = sprite.Group()
 wall_group.add(WALL1)
 wall_group.add(WALL2)
+
+bullet_group = sprite.Group()
+
 
 
 running = True
@@ -41,6 +47,9 @@ while running:
         final_sprite.reset(window)
         monster1.reset(window)
         monster1.update(win_width)
+        bullet_group.update(win_width)
+        bullet_group.draw(window)
+
         if sprite.collide_rect(HERO, monster1):
             finish = False
             game_over = image.load('images/game-over_1.png')
@@ -68,6 +77,10 @@ while running:
                 HERO.y_speed = -2
             elif e.key == K_DOWN:
                 HERO.y_speed = 2
+            
+            elif e.key == K_SPACE:
+                fire()
+
         if e.type == KEYUP:
             if e.key == K_LEFT:
                 HERO.x_speed = 0
@@ -77,8 +90,6 @@ while running:
                 HERO.y_speed = 0
             elif e.key == K_DOWN:
                 HERO.y_speed = 0
-
-
 
     display.update()
 
