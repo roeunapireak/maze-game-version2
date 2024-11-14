@@ -1,6 +1,6 @@
 from pygame import *
 
-from mazeClass import GameSprite, Player
+from mazeClass import GameSprite, Player, Enemy, Bullet
 
 ''' colors '''
 backgroud = (119, 180, 223)
@@ -17,16 +17,20 @@ HERO = Player('images/hero.png', 5, win_height-80, 80, 80, 0,0)
 WALL1 = GameSprite('images/platform2_v.png', 370, 100, 50, 400)
 WALL2 = GameSprite('images/platform2_h.png', win_width/2-win_width/3, win_height/2, 300, 50)
 final_sprite = GameSprite('images/pac-1.png', win_width - 85, win_height - 100, 80, 80)
-monster = GameSprite('images/cyborg.png', win_width - 80, 180, 80, 80)
+# monster = GameSprite('images/cyborg.png', win_width - 80, 180, 80, 80)
+monster1 = Enemy('images/cyborg.png', win_width - 80, 180, 80, 80, 1)
+
 
 wall_group = sprite.Group()
 wall_group.add(WALL1)
 wall_group.add(WALL2)
 
+
 running = True
 finish = True
 ''' game loop '''
 while running: 
+    time.delay(10)
     if finish:
         window.fill(backgroud)
         # WALL1.reset(window)
@@ -35,8 +39,9 @@ while running:
         HERO.reset(window)
         HERO.update(HERO, win_width, win_height, wall_group)
         final_sprite.reset(window)
-        monster.reset(window)
-        if sprite.collide_rect(HERO, monster):
+        monster1.reset(window)
+        monster1.update(win_width)
+        if sprite.collide_rect(HERO, monster1):
             finish = False
             game_over = image.load('images/game-over_1.png')
             back_gr = game_over.get_width() // game_over.get_height()
@@ -56,13 +61,13 @@ while running:
 
         if e.type == KEYDOWN:
             if e.key == K_LEFT:
-                HERO.x_speed = -1
+                HERO.x_speed = -2
             elif e.key == K_RIGHT:
-                HERO.x_speed = 1
+                HERO.x_speed = 2
             elif e.key == K_UP:
-                HERO.y_speed = -1
+                HERO.y_speed = -2
             elif e.key == K_DOWN:
-                HERO.y_speed = 1
+                HERO.y_speed = 2
         if e.type == KEYUP:
             if e.key == K_LEFT:
                 HERO.x_speed = 0

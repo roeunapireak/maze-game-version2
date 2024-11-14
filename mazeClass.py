@@ -41,3 +41,36 @@ class Player(GameSprite):
             elif self.y_speed < 0:
                 for p in platforms_touched:
                     self.rect.top = max(self.rect.top, p.rect.bottom)
+
+class Enemy(GameSprite):
+    def __init__(self, picture, x,y, width,height, speed):
+        GameSprite.__init__(self, picture, x,y, width,height)
+        self.speed = speed
+    
+    direction = 'left'
+
+    def update(self, window_width):
+        if self.rect.x <= 430:
+            self.direction = 'right'
+        elif self.rect.x >= window_width - 70:
+            self.direction = 'left'
+
+        if self.direction == 'left':
+            self.rect.x -= self.speed
+        else:
+            self.rect.x += self.speed
+
+    # def fire(self):
+    #     generate_buller = True
+    #     bullet = Bullet('images/bullet.png', self.rect.right, self.rect.center, 15, 20, 5)
+
+
+class Bullet(GameSprite):
+    def __init__(self, picture, x,y, width,height, speed):
+        GameSprite.__init__(self, picture, x,y, width,height)
+        self.speed = speed
+
+    def update(self, window_width):
+        self.rect.x += self.speed
+        if self.rect.x > window_width + 10:
+            self.kill()
