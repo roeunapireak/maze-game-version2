@@ -25,18 +25,12 @@ class Player(GameSprite):
         if hero.rect.x <= window_width-80 and hero.x_speed > 0 or hero.rect.x >= 0 and hero.x_speed < 0:
             self.rect.x += self.x_speed
             platforms_touched = sprite.spritecollide(self, object_group, False)
-            print(platforms_touched)
             if self.x_speed > 0:
                 for p in platforms_touched:
                     self.rect.right = min(self.rect.right, p.rect.left)
-                    print(self.x_speed)
-                    print(p)
-                    print(self.rect.right)
-                    print(p.rect.left)
             elif self.x_speed < 0:
                 for p in platforms_touched:
                     self.rect.left = max(self.rect.left, p.rect.right)
-                    print(self.x_speed)
 
         if hero.rect.y <= window_height-80 and hero.y_speed > 0 or hero.rect.y >= 0 and hero.y_speed < 0:
             self.rect.y += self.y_speed
@@ -47,3 +41,36 @@ class Player(GameSprite):
             elif self.y_speed < 0:
                 for p in platforms_touched:
                     self.rect.top = max(self.rect.top, p.rect.bottom)
+
+class Enemy(GameSprite):
+    def __init__(self, picture, x,y, width,height, speed):
+        GameSprite.__init__(self, picture, x,y, width,height)
+        self.speed = speed
+    
+    direction = 'left'
+
+    def update(self, window_width):
+        if self.rect.x <= 430:
+            self.direction = 'right'
+        elif self.rect.x >= window_width - 70:
+            self.direction = 'left'
+
+        if self.direction == 'left':
+            self.rect.x -= self.speed
+        else:
+            self.rect.x += self.speed
+
+    # def fire(self):
+    #     generate_buller = True
+    #     bullet = Bullet('images/bullet.png', self.rect.right, self.rect.center, 15, 20, 5)
+
+
+class Bullet(GameSprite):
+    def __init__(self, picture, x,y, width,height, speed):
+        GameSprite.__init__(self, picture, x,y, width,height)
+        self.speed = speed
+
+    def update(self, window_width):
+        self.rect.x += self.speed
+        if self.rect.x > window_width + 10:
+            self.kill()
