@@ -50,6 +50,8 @@ while running:
         bullet_group.update(win_width)
         bullet_group.draw(window)
 
+        # sprite.groupcollide(bullet_group, monster1, True, False)
+
         if sprite.collide_rect(HERO, monster1):
             finish = False
             game_over = image.load('images/game-over_1.png')
