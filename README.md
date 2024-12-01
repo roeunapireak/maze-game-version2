@@ -8,13 +8,12 @@ Plan A) To resize window application to be bigger
         - git clone ..
 
 
-Plan B) To move wall object to left side.
+Plan B) To move wall object to left side. (Failture)
 
     - to move wall to left side.
 
     rollback plan:
         - git stash
-
 
 - To create monster sprite group
 
@@ -24,8 +23,13 @@ Plan B) To move wall object to left side.
     sprite.groupcollide(bullet_group, wall_group, True, False)
 
 
-- To test pyinstaller.exec
+- To test pyinstaller.exe
 
 - To share standard document of PyQt v5 and v6 for pre-review.
     - PyQt-tools
     - PyQt
+
+
+problems:
+
+    - groupcollide & collide_rect
